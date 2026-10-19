@@ -1,0 +1,209 @@
+/* ==========================================================
+   Comic design system — tokens + shared primitives
+   ========================================================== */
+
+:root {
+  --ink: #111111;
+  --paper: #fff6e0;
+  --white: #ffffff;
+  --accent: #ffd60a;
+  --accent-deep: #ffc300;
+  --red: #e63946;
+  --blue: #1d4ed8;
+
+  --font-display: 'Bangers', 'Impact', sans-serif;
+  --font-body: 'Archivo', system-ui, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, monospace;
+
+  --stroke: 4px;
+  --stroke-lg: 6px;
+  --shadow: 8px 8px 0 var(--ink);
+  --shadow-lg: 12px 12px 0 var(--ink);
+
+  --max-w: 1200px;
+  --gutter: 20px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: var(--paper);
+  background-image: radial-gradient(rgba(17, 17, 17, 0.16) 1.6px, transparent 1.7px);
+  background-size: 12px 12px;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 100;
+  background: var(--accent);
+  border: var(--stroke) solid var(--ink);
+  padding: 8px 14px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-decoration: none;
+  &:focus {
+    top: 12px;
+  }
+}
+
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---------- textures ---------- */
+
+.halftone-red {
+  background-color: var(--red);
+  background-image: radial-gradient(rgba(0, 0, 0, 0.22) 2px, transparent 2.1px);
+  background-size: 11px 11px;
+}
+
+.halftone-blue {
+  background-color: var(--blue);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.18) 2px, transparent 2.1px);
+  background-size: 11px 11px;
+}
+
+.rays {
+  background: repeating-conic-gradient(
+    from 0deg at 50% 50%,
+    var(--accent) 0deg 9deg,
+    var(--accent-deep) 9deg 18deg
+  );
+}
+
+/* ---------- primitives ---------- */
+
+.panel {
+  background: var(--white);
+  border: var(--stroke) solid var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.chip {
+  border: 2px solid var(--ink);
+  padding: 4px 10px;
+  background: var(--white);
+
+  &--hot {
+    background: var(--accent);
+  }
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--accent);
+  border: var(--stroke) solid var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+  padding: 10px 22px;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+
+  &:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 var(--ink);
+  }
+
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+
+  &--dark {
+    color: var(--white);
+    background: var(--ink);
+    box-shadow: 5px 5px 0 var(--red);
+    &:hover {
+      box-shadow: 7px 7px 0 var(--red);
+    }
+  }
+
+  &--light {
+    background: var(--white);
+  }
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

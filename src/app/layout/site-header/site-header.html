@@ -1,0 +1,34 @@
+<header class="bar">
+  <div class="container inner">
+    <a class="brand display" href="#top" (click)="closeMenu()">{{ brand() }}</a>
+
+    <button
+      type="button"
+      class="menu-toggle mono"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="primary-nav"
+      (click)="toggleMenu()"
+    >
+      {{ menuOpen() ? 'Close' : 'Menu' }}
+    </button>
+
+    <nav id="primary-nav" class="nav mono" [class.open]="menuOpen()" aria-label="Sections">
+      @for (item of items(); track item.id) {
+        <a
+          [href]="'#' + item.id"
+          [class.active]="active() === item.id"
+          [attr.aria-current]="active() === item.id ? 'true' : null"
+          (click)="closeMenu()"
+          >{{ item.label }}</a
+        >
+      }
+      <a
+        class="cta"
+        [href]="'#' + cta().id"
+        [class.active]="active() === cta().id"
+        (click)="closeMenu()"
+        >{{ cta().label }}</a
+      >
+    </nav>
+  </div>
+</header>

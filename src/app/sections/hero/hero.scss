@@ -1,0 +1,161 @@
+.cover {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  background: var(--white);
+  border: var(--stroke-lg) solid var(--ink);
+  box-shadow: var(--shadow-lg);
+}
+
+.art {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  min-height: 460px;
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  border-right: var(--stroke-lg) solid var(--ink);
+
+  @media (max-width: 720px) {
+    border-right: 0;
+    border-bottom: var(--stroke-lg) solid var(--ink);
+    min-height: 380px;
+    padding: 28px 20px;
+  }
+}
+
+.art-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.issue {
+  background: var(--ink);
+  color: var(--accent);
+  font-size: 14px;
+  padding: 8px 12px;
+  text-transform: uppercase;
+}
+
+.burst {
+  background: var(--white);
+  border: var(--stroke) solid var(--ink);
+  font-size: 22px;
+  padding: 6px 12px;
+  rotate: 4deg;
+  text-transform: uppercase;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(56px, 9vw, 120px);
+  overflow-wrap: anywhere;
+  line-height: 0.86;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--white);
+  -webkit-text-stroke: 4px var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 7px 7px 0 var(--ink);
+}
+
+.role {
+  display: inline-block;
+  margin-top: 20px;
+  background: var(--ink);
+  color: var(--white);
+  font-weight: 800;
+  font-size: 20px;
+  padding: 10px 16px;
+  rotate: -1.5deg;
+}
+
+.tagline {
+  margin-top: 14px;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.intro {
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+
+  @media (max-width: 720px) {
+    padding: 28px 20px;
+  }
+}
+
+.bubble {
+  position: relative;
+  background: var(--white);
+  border: var(--stroke) solid var(--ink);
+  border-radius: 28px;
+  padding: 24px 26px;
+  font-size: 21px;
+  line-height: 1.45;
+  font-weight: 600;
+
+  // speech-bubble tail: ink triangle with a white triangle on top
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent;
+  }
+  &::after {
+    left: 48px;
+    bottom: -26px;
+    border-width: 26px 16px 0;
+    border-top-color: var(--ink);
+  }
+  &::before {
+    left: 52px;
+    bottom: -17px;
+    border-width: 20px 12px 0;
+    border-top-color: var(--white);
+    z-index: 1;
+  }
+}
+
+.id-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-left: 20px;
+  line-height: 1.5;
+}
+
+.avatar {
+  flex: none;
+  width: 84px;
+  height: 84px;
+  display: grid;
+  place-items: center;
+  border: var(--stroke) solid var(--ink);
+  border-radius: 50%;
+  background: var(--accent);
+  font-size: 36px;
+}
+
+.strong {
+  font-weight: 800;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}

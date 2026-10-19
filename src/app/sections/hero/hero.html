@@ -1,0 +1,39 @@
+@let p = profile();
+<section class="cover" aria-labelledby="hero-title">
+  <div class="art rays">
+    <div class="art-top">
+      <span class="issue mono">{{ p.issue }}</span>
+      <span class="burst display">{{ p.badge }}</span>
+    </div>
+
+    <div>
+      <h1 id="hero-title" class="name display">
+        @for (line of nameLines(); track $index) {
+          <span>{{ line }}</span>
+        }
+      </h1>
+      <p class="role">{{ p.role }}</p>
+      <p class="tagline">{{ p.tagline }}</p>
+    </div>
+  </div>
+
+  <div class="intro">
+    <p class="bubble">{{ p.pitch }}</p>
+
+    <div class="id-card">
+      <span class="avatar display" aria-hidden="true">{{ p.initials }}</span>
+      <div>
+        <p class="strong">{{ p.location }}</p>
+        <p>{{ p.stackLine }}</p>
+        <p>{{ p.languages }}</p>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a class="btn" href="#projects">See projects →</a>
+      @if (primaryLink(); as link) {
+        <a class="btn btn--dark" [href]="link.href" target="_blank" rel="noopener">{{ link.label }}</a>
+      }
+    </div>
+  </div>
+</section>

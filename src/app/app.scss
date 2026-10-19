@@ -1,0 +1,12 @@
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+  padding-top: 40px;
+}
+
+.footer {
+  padding: 48px var(--gutter) 64px;
+  text-align: center;
+  font-size: 13px;
+}
