@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { I18n } from '../../content/i18n';
 import { Link, Profile } from '../../content/portfolio.model';
 
 @Component({
@@ -8,6 +9,7 @@ import { Link, Profile } from '../../content/portfolio.model';
   styleUrl: './hero.scss',
 })
 export class Hero {
+  protected readonly ui = inject(I18n).ui;
   readonly profile = input.required<Profile>();
   readonly primaryLink = input<Link>();
 

@@ -1,21 +1,29 @@
-<a class="skip-link" href="#main">Skip to content</a>
+@let d = data();
+<a class="skip-link" href="#main">{{ ui().skipLink }}</a>
 
-<app-site-header id="top" [brand]="data.profile.name" [items]="nav" [cta]="contactNav" />
+<app-site-header id="top" [brand]="d.profile.name" [items]="nav()" [cta]="contactNav()" />
 
 <main id="main" class="container">
-  <app-hero [profile]="data.profile" [primaryLink]="linkedIn" />
+  <app-hero [profile]="d.profile" [primaryLink]="linkedIn()" />
 
-  <app-experience id="experience" aria-labelledby="experience-h" role="region" [chapters]="data.experience" />
-  <app-skills id="skills" aria-labelledby="skills-h" role="region" [groups]="data.skills" />
-  <app-projects id="projects" aria-labelledby="projects-h" role="region" [projects]="data.projects" [moreLink]="gitHub" />
+  <app-experience id="experience" aria-labelledby="experience-h" role="region" [chapters]="d.experience" />
+  <app-skills id="skills" aria-labelledby="skills-h" role="region" [groups]="d.skills" />
+  <app-projects
+    id="projects"
+    aria-labelledby="projects-h"
+    role="region"
+    [projects]="projects()"
+    [state]="projectsState()"
+    [moreLink]="gitHub()"
+  />
   <app-education
     id="education"
     aria-labelledby="education-h"
     role="region"
-    [items]="data.education"
-    [certifications]="data.certifications"
+    [items]="d.education"
+    [certifications]="d.certifications"
   />
-  <app-contact id="contact" aria-labelledby="contact-h" role="region" [contact]="data.contact" />
+  <app-contact id="contact" aria-labelledby="contact-h" role="region" [contact]="d.contact" />
 </main>
 
-<footer class="footer mono">© {{ year }} {{ data.profile.name }} · Built with Angular</footer>
+<footer class="footer mono">© {{ year }} {{ d.profile.name }} · {{ ui().footer }}</footer>

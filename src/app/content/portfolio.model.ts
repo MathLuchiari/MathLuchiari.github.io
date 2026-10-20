@@ -61,8 +61,43 @@ export interface Portfolio {
   profile: Profile;
   experience: Chapter[];
   skills: SkillGroup[];
-  projects: Project[];
   education: Education[];
   certifications: string[];
   contact: Contact;
+}
+
+export type Lang = 'en' | 'pt' | 'es';
+
+interface SectionCopy {
+  kicker: string;
+  title: string;
+}
+
+/** Interface copy that isn't part of the portfolio content itself. */
+export interface UiStrings {
+  skipLink: string;
+  menu: string;
+  close: string;
+  navLabel: string;
+  langLabel: string;
+  nav: Record<'experience' | 'skills' | 'projects' | 'education' | 'contact', string>;
+  sections: Record<'experience' | 'skills' | 'projects' | 'education', SectionCopy>;
+  seeProjects: string;
+  certifications: string;
+  moreTitle: string;
+  moreText: string;
+  repoLink: string;
+  demoLink: string;
+  loadingProjects: string;
+  projectsError: string;
+  stackLabel: string;
+  footer: string;
+}
+
+export interface SiteContent {
+  /** Value for `<html lang>`. */
+  htmlLang: string;
+  meta: { title: string; description: string };
+  ui: UiStrings;
+  portfolio: Portfolio;
 }

@@ -63,6 +63,43 @@
   }
 }
 
+.nav {
+  order: 1;
+  margin-left: auto;
+}
+
+.langs {
+  order: 2;
+  display: flex;
+
+  button {
+    min-width: 44px;
+    min-height: 40px;
+    padding: 6px 10px;
+    font: inherit;
+    font-size: 13px;
+    color: var(--paper);
+    background: transparent;
+    border: 2px solid var(--paper);
+    cursor: pointer;
+
+    & + button {
+      border-left: 0;
+    }
+
+    &:hover {
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    &[aria-pressed='true'] {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--ink);
+    }
+  }
+}
+
 .menu-toggle {
   display: none;
   min-height: 44px;
@@ -76,6 +113,15 @@
 }
 
 @media (max-width: 760px) {
+  .langs {
+    order: 0;
+    margin-left: auto;
+
+    button {
+      min-height: 44px;
+    }
+  }
+
   .menu-toggle {
     display: inline-block;
   }

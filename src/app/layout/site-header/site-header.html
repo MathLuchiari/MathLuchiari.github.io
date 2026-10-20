@@ -2,6 +2,20 @@
   <div class="container inner">
     <a class="brand display" href="#top" (click)="closeMenu()">{{ brand() }}</a>
 
+    <div class="langs mono" role="group" [attr.aria-label]="ui().langLabel">
+      @for (l of langs; track l.code) {
+        <button
+          type="button"
+          [attr.lang]="l.code"
+          [attr.aria-label]="l.name"
+          [attr.aria-pressed]="lang() === l.code"
+          (click)="setLang(l.code)"
+        >
+          {{ l.short }}
+        </button>
+      }
+    </div>
+
     <button
       type="button"
       class="menu-toggle mono"
@@ -9,10 +23,10 @@
       aria-controls="primary-nav"
       (click)="toggleMenu()"
     >
-      {{ menuOpen() ? 'Close' : 'Menu' }}
+      {{ menuOpen() ? ui().close : ui().menu }}
     </button>
 
-    <nav id="primary-nav" class="nav mono" [class.open]="menuOpen()" aria-label="Sections">
+    <nav id="primary-nav" class="nav mono" [class.open]="menuOpen()" [attr.aria-label]="ui().navLabel">
       @for (item of items(); track item.id) {
         <a
           [href]="'#' + item.id"

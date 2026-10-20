@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { I18n } from '../../content/i18n';
 import { Education as EducationItem } from '../../content/portfolio.model';
 import { SectionHeading } from '../../shared/section-heading/section-heading';
 
@@ -7,12 +8,8 @@ import { SectionHeading } from '../../shared/section-heading/section-heading';
   imports: [SectionHeading],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <app-section-heading
-      kicker="training arc"
-      title="Education & Certifications"
-      headingId="education-h"
-      tone="blue"
-    />
+    @let s = ui().sections.education;
+    <app-section-heading [kicker]="s.kicker" [title]="s.title" headingId="education-h" tone="blue" />
     <div class="grid">
       @for (e of items(); track e.title) {
         <div class="card panel">
@@ -23,7 +20,7 @@ import { SectionHeading } from '../../shared/section-heading/section-heading';
       }
       @if (certifications().length) {
         <div class="card panel certs">
-          <h3 class="display">Certifications</h3>
+          <h3 class="display">{{ ui().certifications }}</h3>
           <ul>
             @for (c of certifications(); track c) {
               <li>{{ c }}</li>
@@ -55,6 +52,7 @@ import { SectionHeading } from '../../shared/section-heading/section-heading';
   `,
 })
 export class Education {
+  protected readonly ui = inject(I18n).ui;
   readonly items = input.required<EducationItem[]>();
   readonly certifications = input<string[]>([]);
 }

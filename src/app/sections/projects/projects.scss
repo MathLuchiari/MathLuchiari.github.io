@@ -163,3 +163,14 @@
     }
   }
 }
+
+.notice {
+  grid-column: 1 / -1;
+  justify-self: start;
+  background: var(--accent);
+  border: var(--stroke) solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  padding: 14px 20px;
+  font-size: 14px;
+  text-transform: uppercase;
+}

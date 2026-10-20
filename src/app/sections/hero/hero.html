@@ -30,7 +30,7 @@
     </div>
 
     <div class="actions">
-      <a class="btn" href="#projects">See projects →</a>
+      <a class="btn" href="#projects">{{ ui().seeProjects }}</a>
       @if (primaryLink(); as link) {
         <a class="btn btn--dark" [href]="link.href" target="_blank" rel="noopener">{{ link.label }}</a>
       }
