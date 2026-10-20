@@ -1,8 +1,7 @@
 import { Injectable, computed, effect, signal } from '@angular/core';
-import { ES } from './locales/es';
-import { EN } from './locales/en';
-import { PT } from './locales/pt';
+import { localize } from './localized';
 import { Lang, SiteContent } from './portfolio.model';
+import { SITE } from './site.content';
 
 export const LANGS: readonly { code: Lang; short: string; name: string }[] = [
   { code: 'en', short: 'EN', name: 'English' },
@@ -10,11 +9,10 @@ export const LANGS: readonly { code: Lang; short: string; name: string }[] = [
   { code: 'es', short: 'ES', name: 'Español' },
 ];
 
-const CONTENT: Record<Lang, SiteContent> = { en: EN, pt: PT, es: ES };
 const STORAGE_KEY = 'lang';
 
 const isLang = (value: unknown): value is Lang =>
-  typeof value === 'string' && Object.hasOwn(CONTENT, value);
+  typeof value === 'string' && LANGS.some((l) => l.code === value);
 
 /** Saved choice first, then the browser's preferred languages, then English. */
 function initialLang(): Lang {
@@ -35,7 +33,7 @@ function initialLang(): Lang {
 @Injectable({ providedIn: 'root' })
 export class I18n {
   readonly lang = signal<Lang>(initialLang());
-  readonly content = computed(() => CONTENT[this.lang()]);
+  readonly content = computed(() => localize<SiteContent>(SITE, this.lang()));
   readonly ui = computed(() => this.content().ui);
 
   constructor() {
