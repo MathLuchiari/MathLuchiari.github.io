@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { I18n } from '../../content/i18n';
 import { SkillGroup } from '../../content/portfolio.model';
 import { SectionHeading } from '../../shared/section-heading/section-heading';
 
@@ -7,7 +8,8 @@ import { SectionHeading } from '../../shared/section-heading/section-heading';
   imports: [SectionHeading],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <app-section-heading kicker="superpowers" title="Skills" headingId="skills-h" tone="red" [tilt]="1" />
+    @let s = ui().sections.skills;
+    <app-section-heading [kicker]="s.kicker" [title]="s.title" headingId="skills-h" tone="red" [tilt]="1" />
     <div class="groups">
       @for (g of groups(); track g.title) {
         <div class="group">
@@ -43,5 +45,6 @@ import { SectionHeading } from '../../shared/section-heading/section-heading';
   `,
 })
 export class Skills {
+  protected readonly ui = inject(I18n).ui;
   readonly groups = input.required<SkillGroup[]>();
 }

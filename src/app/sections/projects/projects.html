@@ -1,6 +1,16 @@
-<app-section-heading kicker="mission files" title="Projects" headingId="projects-h" />
+@let t = ui();
+<app-section-heading [kicker]="t.sections.projects.kicker" [title]="t.sections.projects.title" headingId="projects-h" />
 
-<div class="grid">
+<div class="grid" [attr.aria-busy]="state() === 'loading'">
+  @switch (state()) {
+    @case ('loading') {
+      <p class="notice mono" role="status">{{ t.loadingProjects }}</p>
+    }
+    @case ('error') {
+      <p class="notice mono" role="status">{{ t.projectsError }}</p>
+    }
+  }
+
   @for (p of projects(); track p.name) {
     <article class="project" [class.featured]="p.featured">
       <div class="cover" [class.halftone-red]="p.tone === 'red'" [class.halftone-blue]="p.tone === 'blue'">
@@ -15,11 +25,13 @@
       <div class="body">
         <h3 class="display">{{ p.title }}</h3>
         <p>{{ p.description }}</p>
-        <ul class="chip-list" [attr.aria-label]="p.name + ' stack'">
-          @for (s of p.stack; track s) {
-            <li class="chip">{{ s }}</li>
-          }
-        </ul>
+        @if (p.stack.length) {
+          <ul class="chip-list" [attr.aria-label]="p.name + ' ' + t.stackLabel">
+            @for (s of p.stack; track s) {
+              <li class="chip">{{ s }}</li>
+            }
+          </ul>
+        }
         @if (p.links?.length) {
           <div class="links">
             @for (l of p.links; track l.href; let first = $first) {
@@ -35,8 +47,8 @@
 
   @if (moreLink(); as more) {
     <a class="more" [href]="more.href" target="_blank" rel="noopener">
-      <span class="more-burst display">More on GitHub</span>
-      <span class="more-text">Courses, experiments and team projects from the FIAP Software Architecture postgrad.</span>
+      <span class="more-burst display">{{ t.moreTitle }}</span>
+      <span class="more-text">{{ t.moreText }}</span>
       <span class="more-cta mono">{{ more.href.replace('https://', '') }} →</span>
     </a>
   }

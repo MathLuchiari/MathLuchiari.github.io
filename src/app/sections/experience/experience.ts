@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { I18n } from '../../content/i18n';
 import { Chapter } from '../../content/portfolio.model';
 import { SectionHeading } from '../../shared/section-heading/section-heading';
 
@@ -7,7 +8,8 @@ import { SectionHeading } from '../../shared/section-heading/section-heading';
   imports: [SectionHeading],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <app-section-heading kicker="the origin story" title="Experience" headingId="experience-h" />
+    @let s = ui().sections.experience;
+    <app-section-heading [kicker]="s.kicker" [title]="s.title" headingId="experience-h" />
     <ol class="chapters">
       @for (c of chapters(); track c.period) {
         <li class="chapter panel" [attr.data-tone]="c.tone">
@@ -58,5 +60,6 @@ import { SectionHeading } from '../../shared/section-heading/section-heading';
   `,
 })
 export class Experience {
+  protected readonly ui = inject(I18n).ui;
   readonly chapters = input.required<Chapter[]>();
 }
