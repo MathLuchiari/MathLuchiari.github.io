@@ -20,7 +20,8 @@ src/
 └── app/
     ├── content/
     │   ├── portfolio.model.ts      # typed content model
-    │   ├── locales/{en,pt,es}.ts   # ALL site copy, one file per language
+    │   ├── site.content.ts         # ALL site copy, every language side by side
+    │   ├── localized.ts            # { en, pt, es } type + resolver
     │   ├── i18n.ts                 # runtime language switch (signal + localStorage)
     │   └── github-projects.ts      # loads the projects tagged on GitHub
     ├── layout/site-header/         # sticky nav, language switcher, mobile menu, scroll-spy
@@ -28,7 +29,21 @@ src/
     └── sections/                   # hero, experience, skills, projects, education, contact
 ```
 
-Content and presentation are separated: to update the site, edit the files in `content/locales/`. `en.ts` is the reference; `pt.ts` and `es.ts` reuse its non-text values and the compiler makes sure every locale has every field. Optional fields (project links, contact links) are hidden when left out.
+Content and presentation are separated: to update the site, edit `content/site.content.ts`. Each item exists once, with its translations next to each other:
+
+```ts
+{
+  period: '2020 – 2023',                       // same in every language
+  title: {                                     // one per language
+    en: 'B.Sc. Computer Science',
+    pt: 'Bacharelado em Ciência da Computação',
+    es: 'Licenciatura en Ciencias de la Computación',
+  },
+  school: 'USCS',
+}
+```
+
+A text is either a plain string (names, links, tech names) or `{ en, pt, es }`; leaving a language out of the object is a compile error. Optional fields (contact links) are hidden when left out.
 
 ## Languages
 
